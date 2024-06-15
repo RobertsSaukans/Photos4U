@@ -15,11 +15,6 @@
         @foreach ($photos as $photo)
             <li>
                 <a href="{{ route('photos.show', $photo->id) }}">{{ $photo->title }}</a>
-                <p>Categories:
-                    @foreach ($photo->categories as $category)
-                        {{ $category->name }},
-                    @endforeach
-                </p>
             </li>
         @endforeach
     </ul>

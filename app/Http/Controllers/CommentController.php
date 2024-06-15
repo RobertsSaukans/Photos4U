@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Photo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CommentController extends Controller
 {
@@ -13,13 +14,13 @@ class CommentController extends Controller
     {
         $request->validate([
             'photo_id' => 'required|exists:photos,id',
-            'content' => 'required|string|max:255',
+            'body' => 'required|string',
         ]);
 
         $comment = new Comment();
         $comment->user_id = Auth::id();
         $comment->photo_id = $request->photo_id;
-        $comment->content = $request->content;
+        $comment->body = $request->body;
         $comment->save();
 
         return redirect()->route('photos.show', $request->photo_id)
