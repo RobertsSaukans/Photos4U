@@ -6,7 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
-
+use App\Http\Controllers\Auth\GoogleController;
 
 Route::get('/', [CategoryController::class, 'index'])->name('home');
 
@@ -42,5 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/photos/add-category', [AdminController::class, 'storeCategoryToPhoto']);
     Route::delete('/admin/photos/{photo}', [AdminController::class, 'deletePhoto'])->name('admin.photos.delete');
 });
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 require __DIR__.'/auth.php';
