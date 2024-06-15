@@ -73,11 +73,17 @@ class AdminController extends Controller
         if ($category->photos()->count() > 0) {
         return redirect()->route('categories.index')
                          ->with('error', 'Category cannot be deleted because it is associated with photos.');
-    }
+        }
 
         $category->delete();
         return redirect()->route('categories.index')
                          ->with('success', 'Category deleted successfully.');
+    }
+
+    public function destroyComment(Comment $comment)
+    {
+        $comment->delete();
+        return redirect()->back()->with('success', 'Comment deleted successfully.');
     }
 
 }

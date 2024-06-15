@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/photos/add-category', [AdminController::class, 'storeCategoryToPhoto']);
     Route::delete('/admin/photos/{photo}', [AdminController::class, 'deletePhoto'])->name('admin.photos.delete');
     Route::delete('/admin/categories/{category}', [AdminController::class, 'deleteCategory'])->name('admin.categories.delete');
-
+    Route::delete('/admin/comments/{comment}', [AdminController::class, 'destroyComment'])->name('admin.comments.destroy');
 });
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');

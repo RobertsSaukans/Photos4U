@@ -12,6 +12,8 @@
                     {{ __("You're logged in!") }}
                     <!-- Button to redirect to the category index -->
                     <a href="{{ route('categories.index') }}" class="btn btn-primary">View Categories</a>
+                    <a href="{{ route('photos.index') }}" class="btn btn-primary">View Photos</a>
+
                 </div>
             </div>
         </div>
