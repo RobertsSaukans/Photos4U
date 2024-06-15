@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
 // Category routes
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/search', [CategoryController::class, 'search'])->name('categories.search');
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 // Photo routes
 Route::get('/photos', [PhotoController::class, 'index'])->name('photos.index');
@@ -41,6 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/photos/add-category', [AdminController::class, 'addCategoryToPhoto'])->name('admin.photos.add_category');
     Route::post('/admin/photos/add-category', [AdminController::class, 'storeCategoryToPhoto']);
     Route::delete('/admin/photos/{photo}', [AdminController::class, 'deletePhoto'])->name('admin.photos.delete');
+    Route::delete('/admin/categories/{category}', [AdminController::class, 'deleteCategory'])->name('admin.categories.delete');
+
 });
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');

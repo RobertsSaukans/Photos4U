@@ -5,9 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    /*public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if (!Auth::user()->isAdmin()) {
+                return redirect()->route('categories.index')
+                                 ->with('error', 'Unauthorized access.');
+            }
+            return $next($request);
+        })->only(['deleteCategory']);
+    }*/
+
     public function createCategory()
     {
         return view('admin.create_category');
@@ -54,4 +67,17 @@ class AdminController extends Controller
         return redirect()->route('photos.index')
                          ->with('success', 'Photo deleted successfully.');
     }
+
+    public function deleteCategory(Category $category)
+    {
+        if ($category->photos()->count() > 0) {
+        return redirect()->route('categories.index')
+                         ->with('error', 'Category cannot be deleted because it is associated with photos.');
+    }
+
+        $category->delete();
+        return redirect()->route('categories.index')
+                         ->with('success', 'Category deleted successfully.');
+    }
+
 }

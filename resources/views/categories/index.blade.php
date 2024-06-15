@@ -7,6 +7,15 @@
 </head>
 <body>
     <h1>Categories</h1>
+
+    @auth
+        @if(Auth::user()->isAdmin())
+            <a href="{{ route('admin.categories.create') }}" method="POST" style="display:inline;">
+                Create Category
+            </a>
+        @endif
+    @endauth
+
     @if (Route::has('login'))
         <nav class="-mx-3 flex flex-1 justify-end">
         @auth
@@ -25,9 +34,24 @@
         <button type="submit">Search</button>
     </form>
     <ul>
-        @foreach ($categories as $category)
-            <li>{{ $category->name }}</li>
+        @foreach($categories as $category)
+            <li>
+                <a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
+            </li>
         @endforeach
-    </ul>
+        </ul>
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+    </div>
 </body>
 </html>

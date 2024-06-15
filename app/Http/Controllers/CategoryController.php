@@ -19,4 +19,10 @@ class CategoryController extends Controller
         $categories = Category::where('name', 'like', '%' . $search . '%')->get();
         return view('categories.index', compact('categories'));
     }
+
+    public function show(Category $category)
+    {
+    $category->load('photos');
+    return view('categories.show', compact('category'));
+    }
 }
