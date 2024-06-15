@@ -22,21 +22,41 @@ class PhotoController extends Controller
 
     public function store(Request $request)
     {
-        $photo = new Photo;
-        $photo->user_id = auth()->id();
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $imagePath = $request->file('image')->store('photos', 'public');
+
+        $photo = new Photo();
         $photo->title = $request->title;
-        $photo->image_path = $request->image_path; // Handle file upload
+        $photo->image_path = $imagePath;
+        $photo->user_id = auth()->id();
         $photo->save();
 
-        $photo->categories()->attach($request->categories);
+        if ($request->categories) {
+            $photo->categories()->attach($request->categories);
+        }
 
-        return redirect()->route('photos.index');
+        return redirect()->route('photos.index')
+                         ->with('success', 'Photo uploaded successfully.');
+    }
+
+    public function show(Photo $photo)
+    {
+        $photo->load('categories', 'comments.user');
+        return view('photos.show', compact('photo'));
     }
 
     public function search(Request $request)
     {
-        $search = $request->input('search');
-        $photos = Photo::where('title', 'like', '%' . $search . '%')->get();
+        $query = $request->input('query');
+        $photos = Photo::where('title', 'like', "%$query%")
+                       ->orWhereHas('categories', function ($q) use ($query) {
+                           $q->where('name', 'like', "%$query%");
+                       })->get();
+
         return view('photos.index', compact('photos'));
     }
 }
