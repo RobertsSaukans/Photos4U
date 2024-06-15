@@ -46,7 +46,8 @@ class PhotoController extends Controller
     public function show(Photo $photo)
     {
         $photo->load('categories', 'comments.user');
-        return view('photos.show', compact('photo'));
+        $categories = Category::all();
+        return view('photos.show', compact('photo', 'categories'));
     }
 
     public function search(Request $request)

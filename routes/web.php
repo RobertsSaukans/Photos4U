@@ -39,8 +39,7 @@ Route::post('/comments', [CommentController::class, 'store'])->middleware('auth'
 Route::middleware('auth')->group(function () {
     Route::get('/admin/categories/create', [AdminController::class, 'createCategory'])->name('admin.categories.create');
     Route::post('/admin/categories', [AdminController::class, 'storeCategory'])->name('admin.categories.store');
-    Route::get('/admin/photos/add-category', [AdminController::class, 'addCategoryToPhoto'])->name('admin.photos.add_category');
-    Route::post('/admin/photos/add-category', [AdminController::class, 'storeCategoryToPhoto']);
+    Route::post('admin/storeCategoryToPhoto/{photo}', [AdminController::class, 'storeCategoryToPhoto'])->name('admin.storeCategoryToPhoto');
     Route::delete('/admin/photos/{photo}', [AdminController::class, 'deletePhoto'])->name('admin.photos.delete');
     Route::delete('/admin/categories/{category}', [AdminController::class, 'deleteCategory'])->name('admin.categories.delete');
     Route::delete('/admin/comments/{comment}', [AdminController::class, 'destroyComment'])->name('admin.comments.destroy');

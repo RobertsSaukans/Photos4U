@@ -9,18 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    /*public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            if (!Auth::user()->isAdmin()) {
-                return redirect()->route('categories.index')
-                                 ->with('error', 'Unauthorized access.');
-            }
-            return $next($request);
-        })->only(['deleteCategory']);
-    }*/
-
     public function createCategory()
     {
         return view('admin.create_category');
@@ -40,25 +28,13 @@ class AdminController extends Controller
                          ->with('success', 'Category created successfully.');
     }
 
-    public function addCategoryToPhoto()
+    public function storeCategoryToPhoto(Request $request, $photo_id)
     {
-        $photos = Photo::all();
-        $categories = Category::all();
-        return view('admin.add_category_to_photo', compact('photos', 'categories'));
-    }
+        $photo = Photo::findOrFail($photo_id);
+        $categories = $request->input('categories', []);
 
-    public function storeCategoryToPhoto(Request $request)
-    {
-        $request->validate([
-            'photo_id' => 'required|exists:photos,id',
-            'category_id' => 'required|exists:categories,id',
-        ]);
-
-        $photo = Photo::findOrFail($request->photo_id);
-        $photo->categories()->attach($request->category_id);
-
-        return redirect()->route('photos.index')
-                         ->with('success', 'Category added to photo successfully.');
+        $photo->categories()->syncWithoutDetaching($categories);
+        return redirect()->route('photos.show', $photo_id)->with('success', 'Categories added to the photo successfully.');
     }
 
     public function deletePhoto(Photo $photo)

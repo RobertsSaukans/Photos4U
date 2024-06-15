@@ -18,11 +18,27 @@
         @endif
     @endauth
     
-    <p>Categories:
+    <h3>Categories:</h3>
         @foreach ($photo->categories as $category)
             {{ $category->name }},
         @endforeach
-    </p>
+
+    @if(Auth::user()->is_admin)
+    <h3>Add Categories</h3>
+    <form action="{{ route('admin.storeCategoryToPhoto', $photo->id) }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="categories">Select Categories:</label>
+            <select name="categories[]" id="categories" class="form-control" multiple>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Categories</button>
+    </form>
+    @endif
+
     <h2>Comments</h2>
     <ul>
         @foreach($photo->comments as $comment)

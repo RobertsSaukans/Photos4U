@@ -10,12 +10,13 @@
         <h2>Photos</h2>
         <ul>
             @forelse($category->photos as $photo)
-                <li>{{ $photo->title }}</li>
+                <li>
+                <a href="{{ route('photos.show', $photo->id) }}">{{ $photo->title }}</a>
+                </li>
             @empty
                 <li>No photos in this category.</li>
             @endforelse
         </ul>
-        <a href="{{ route('categories.index') }}" class="btn btn-secondary">Back to Categories</a>
         @auth
             @if(Auth::user()->isAdmin())
                 <form action="{{ route('admin.categories.delete', $category->id) }}" method="POST" style="display:inline;">

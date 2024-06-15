@@ -29,29 +29,23 @@
         @endauth
         </nav>
     @endif
-    <form method="GET" action="{{ route('categories.search') }}">
-        <input type="text" name="query" placeholder="Search categories">
-        <button type="submit">Search</button>
+    <form action="{{ route('categories.search') }}" method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="query" class="form-control" placeholder="Search categories..." value="{{ request('query') }}">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </span>
+        </div>
     </form>
+
     <ul>
-        @foreach($categories as $category)
-            <li>
-                <a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
-            </li>
-        @endforeach
-        </ul>
-
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-    </div>
+    @forelse ($categories as $category)
+        <li>
+            <a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
+        </li>
+    @empty
+        <li>No categories found.</li>
+    @endforelse
+    </ul>
 </body>
 </html>

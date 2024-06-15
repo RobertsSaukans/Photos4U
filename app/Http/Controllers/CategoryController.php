@@ -15,8 +15,12 @@ class CategoryController extends Controller
 
     public function search(Request $request)
     {
-        $search = $request->input('search');
-        $categories = Category::where('name', 'like', '%' . $search . '%')->get();
+        $query = $request->input('query');
+        if ($query) {
+            $categories = Category::where('name', 'LIKE', '%' . $query . '%')->get();
+        } else {
+            $categories = Category::all();
+        }
         return view('categories.index', compact('categories'));
     }
 
