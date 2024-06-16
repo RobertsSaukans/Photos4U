@@ -20,9 +20,12 @@
     
     <h3>Categories:</h3>
         @foreach ($photo->categories as $category)
-            {{ $category->name }},
+        <li>
+            <a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
+        </li>
         @endforeach
 
+    @auth
     @if(Auth::user()->is_admin)
     <h3>Add Categories</h3>
     <form action="{{ route('admin.storeCategoryToPhoto', $photo->id) }}" method="POST">
@@ -38,6 +41,8 @@
         <button type="submit" class="btn btn-primary">Add Categories</button>
     </form>
     @endif
+    @endauth
+
 
     <h2>Comments</h2>
     <ul>
