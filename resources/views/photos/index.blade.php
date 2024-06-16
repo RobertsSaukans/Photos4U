@@ -6,6 +6,7 @@
     <title>Photos4U</title>
 </head>
 <body>
+@include('layouts.navbar')
     <h1>Photos</h1>
     @auth
         <a href="{{ route('photos.create') }}" method="POST">

@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
+@include('layouts.navbar')
     <div class="container">
         <h1>{{ $category->name }}</h1>
         <h2>Photos</h2>

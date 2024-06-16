@@ -6,6 +6,7 @@
     <title>Photos4U</title>
 </head>
 <body>
+@include('layouts.navbar')
     <h1>Search Results</h1>
     <form method="GET" action="{{ route('categories.search') }}">
         <input type="text" name="query" placeholder="Search categories">

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Photos4U</title></head>
 <body>
+@include('layouts.navbar')
     <h1>{{ $photo->title }}</h1>
     <img src="{{ asset('storage/' . $photo->image_path) }}" alt="{{ $photo->title }}">
     

@@ -6,6 +6,7 @@
     <title>Photos4U</title>
 </head>
 <body>
+@include('layouts.navbar')
     <h1>Add New Photo</h1>
     <form method="POST" action="{{ route('photos.store') }}" enctype="multipart/form-data">
         @csrf

@@ -6,8 +6,8 @@
     <title>Photos4U</title>
 </head>
 <body>
+@include('layouts.navbar')
     <h1>Categories</h1>
-
     @auth
         @if(Auth::user()->isAdmin())
             <a href="{{ route('admin.categories.create') }}" method="POST" style="display:inline;">
@@ -16,19 +16,6 @@
         @endif
     @endauth
 
-    @if (Route::has('login'))
-        <nav class="-mx-3 flex flex-1 justify-end">
-        @auth
-        <a href="{{ url('/dashboard') }}">Dashboard</a>
-    @else
-        <a href="{{ route('login') }}">Log in</a>
-
-    @if (Route::has('register'))
-        <a href="{{ route('register') }}">Register</a>
-    @endif
-        @endauth
-        </nav>
-    @endif
     <form action="{{ route('categories.search') }}" method="GET" class="mb-4">
         <div class="input-group">
             <input type="text" name="query" class="form-control" placeholder="Search categories..." value="{{ request('query') }}">
