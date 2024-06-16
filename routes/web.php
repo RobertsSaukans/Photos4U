@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/photos/{photo}', [AdminController::class, 'deletePhoto'])->name('admin.photos.delete');
     Route::delete('/admin/categories/{category}', [AdminController::class, 'deleteCategory'])->name('admin.categories.delete');
     Route::delete('/admin/comments/{comment}', [AdminController::class, 'destroyComment'])->name('admin.comments.destroy');
+    Route::delete('/admin/photos/{photo}/categories/{category}', [AdminController::class, 'removeCategoryFromPhoto'])->name('admin.photos.removeCategory');
 });
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');

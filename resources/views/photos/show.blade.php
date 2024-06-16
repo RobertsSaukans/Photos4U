@@ -19,11 +19,20 @@
     @endauth
     
     <h3>Categories:</h3>
+    <ul>
         @foreach ($photo->categories as $category)
-        <li>
+            <li>
             <a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
-        </li>
+                @if(Auth::check() && Auth::user()->isAdmin())
+                    <form action="{{ route('admin.photos.removeCategory', [$photo->id, $category->id]) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                @endif
+            </li>
         @endforeach
+    </ul>
 
     @auth
     @if(Auth::user()->is_admin)

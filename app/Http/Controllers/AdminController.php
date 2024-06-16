@@ -38,6 +38,12 @@ class AdminController extends Controller
         return redirect()->route('photos.show', $photo_id)->with('success', 'Categories added to the photo successfully.');
     }
 
+    public function removeCategoryFromPhoto(Photo $photo, Category $category)
+    {
+        $photo->categories()->detach($category->id);
+        return redirect()->back()->with('success', 'Category removed successfully.');
+    }
+
     public function deletePhoto(Photo $photo)
     {
         $photo->delete();
