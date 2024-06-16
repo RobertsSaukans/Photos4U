@@ -8,15 +8,17 @@
 @include('layouts.navbar')
     <div class="container">
         <h1>{{ $category->name }}</h1>
-        <h2>Photos</h2>
-        <ul>
-            @forelse($category->photos as $photo)
-                <li>
-                <a href="{{ route('photos.show', $photo->id) }}">{{ $photo->title }}</a>
-                </li>
-            @empty
-                <li>No photos in this category.</li>
-            @endforelse
+        <ul class="list-unstyled">
+        @forelse($category->photos as $photo)
+            <li class="mb-3">
+                <a href="{{ route('photos.show', $photo->id) }}">
+                <img src="{{ asset('storage/' . $photo->image_path) }}" alt="{{ $photo->title }}" style="width: 200px;">
+                </a>
+                <p>{{ $photo->path }}</p> <!-- For debugging: show the photo path -->
+            </li>
+        @empty
+            <li>No photos in this category.</li>
+        @endforelse
         </ul>
         @auth
             @if(Auth::user()->isAdmin())

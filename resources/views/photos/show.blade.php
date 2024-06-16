@@ -7,7 +7,7 @@
 <body>
 @include('layouts.navbar')
     <h1>{{ $photo->title }}</h1>
-    <img src="{{ asset('storage/' . $photo->image_path) }}" alt="{{ $photo->title }}">
+    <img src="{{ asset('storage/' . $photo->image_path) }}" alt="{{ $photo->title }}" style="width: 800px;">
     
     @auth
         @if(Auth::user()->isAdmin())
