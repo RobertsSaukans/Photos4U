@@ -7,6 +7,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', [CategoryController::class, 'index'])->name('home');
 

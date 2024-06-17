@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet"> 
     <title>Photos4U</title>
 </head>
 <body>
@@ -10,9 +11,9 @@
     <h1>Categories</h1>
     @auth
         @if(Auth::user()->isAdmin())
-            <a href="{{ route('admin.categories.create') }}" method="POST" style="display:inline;">
-                Create Category
-            </a>
+        <form method="GET" action="{{ route('admin.categories.create') }}">
+            <button type="submit">Create New Category</button>
+        </form>
         @endif
     @endauth
 

@@ -7,6 +7,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 class PhotoController extends Controller
 {
@@ -26,7 +28,9 @@ class PhotoController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id',
         ]);
 
         if ($validator->fails()) {
@@ -40,15 +44,12 @@ class PhotoController extends Controller
         $photo = new Photo();
         $photo->title = $request->title;
         $photo->image_path = $imagePath;
-        $photo->user_id = auth()->id();
+        $photo->user_id = Auth::id();
         $photo->save();
 
-        if ($request->categories) {
-            $photo->categories()->attach($request->categories);
-        }
+        $photo->categories()->attach($request->categories);
 
-        return redirect()->route('photos.index')
-                         ->with('success', 'Photo uploaded successfully.');
+        return redirect()->route('photos.create')->with('success', 'Photo uploaded successfully.');
     }
 
     public function show(Photo $photo)
