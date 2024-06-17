@@ -7,7 +7,23 @@
 </head>
 <body>
 @include('layouts.navbar')
-    <h1>Add New Photo</h1>
+    <div class="container mt-4">
+        <h1>Add New Photo</h1>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     <form method="POST" action="{{ route('photos.store') }}" enctype="multipart/form-data">
         @csrf
         <label for="title">Title:</label>

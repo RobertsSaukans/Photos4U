@@ -6,6 +6,7 @@
     <title>Photos4U</title>
 </head>
 <body>
+@include('layouts.navbar')
     <h1>Add Category to Photo</h1>
     <form method="POST" action="{{ route('admin.photos.add_category') }}">
         @csrf

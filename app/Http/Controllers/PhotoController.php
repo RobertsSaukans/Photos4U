@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Photo;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PhotoController extends Controller
 {
@@ -22,10 +24,16 @@ class PhotoController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('photos.create')
+                             ->withErrors($validator)
+                             ->withInput();
+        }
 
         $imagePath = $request->file('image')->store('photos', 'public');
 

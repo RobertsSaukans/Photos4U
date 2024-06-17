@@ -8,6 +8,15 @@
 @include('layouts.navbar')
     <div class="container">
         <h1>{{ $category->name }}</h1>
+        @auth
+            @if(Auth::user()->isAdmin())
+                <form action="{{ route('admin.categories.delete', $category->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?');">Delete Category</button>
+                </form>
+            @endif
+        @endauth
         <ul class="list-unstyled">
         @forelse($category->photos as $photo)
             <li class="mb-3">
@@ -19,15 +28,6 @@
             <li>No photos in this category.</li>
         @endforelse
         </ul>
-        @auth
-            @if(Auth::user()->isAdmin())
-                <form action="{{ route('admin.categories.delete', $category->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?');">Delete Category</button>
-                </form>
-            @endif
-        @endauth
     </div>
 </body>
 </html>
