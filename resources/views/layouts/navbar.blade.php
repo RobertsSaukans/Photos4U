@@ -8,11 +8,11 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> 
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet"> 
     
-    <!-- Scripts 
+    <!-- Scripts
    @vite(['resources/css/app.css', 'resources/js/app.js']) -->
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <a class="navbar-brand" href="{{ route('dashboard') }}">Photos4U</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -35,9 +35,6 @@
                     <a class="nav-link" href="{{ route('register') }}">Register</a>
                 </li>
             @else
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
-                </li>
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                         @csrf
