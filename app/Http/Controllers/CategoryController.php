@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('name')->get();
         return view('categories.index', compact('categories'));
     }
 
@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         $query = $request->input('query');
         if ($query) {
-            $categories = Category::where('name', 'LIKE', '%' . $query . '%')->get();
+            $categories = Category::where('name', 'LIKE', '%' . $query . '%')->orderBy('name')->get();
         } else {
             $categories = Category::all();
         }
@@ -26,7 +26,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-    $category->load('photos');
-    return view('categories.show', compact('category'));
+        $category->load('photos');
+        return view('categories.show', compact('category'));
     }
 }

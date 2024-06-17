@@ -14,7 +14,6 @@
                 <a href="{{ route('photos.show', $photo->id) }}">
                 <img src="{{ asset('storage/' . $photo->image_path) }}" alt="{{ $photo->title }}" style="width: 200px;">
                 </a>
-                <p>{{ $photo->path }}</p> <!-- For debugging: show the photo path -->
             </li>
         @empty
             <li>No photos in this category.</li>
