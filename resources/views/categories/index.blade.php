@@ -6,34 +6,36 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet"> 
     <title>Photos4U</title>
 </head>
-<body>
-@include('layouts.navbar')
-    <h1>Categories</h1>
+<body class="category-index" >
+<header>@include('layouts.navbar')</header>
+    <main>
+    <h1 class="category-index-header" >{{ __('messages.categories') }}</h1>
     @auth
         @if(Auth::user()->isAdmin())
         <form method="GET" action="{{ route('admin.categories.create') }}">
-            <button type="submit">Create New Category</button>
+            <button class="create-category" type="submit">{{ __('messages.create_new_category') }}</button>
         </form>
         @endif
     @endauth
 
     <form action="{{ route('categories.search') }}" method="GET" class="mb-4">
         <div class="input-group">
-            <input type="text" name="query" class="form-control" placeholder="Search categories..." value="{{ request('query') }}">
+            <input type="text" name="query" class="form-control" placeholder="{{ __('messages.search_categories') }}" value="{{ request('query') }}">
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="submit">Search</button>
+                <button class="btn btn-primary" type="submit">{{ __('messages.search') }}</button>
             </span>
         </div>
     </form>
 
     <ul>
     @forelse ($categories as $category)
-        <li>
-            <a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
+        <li class="list-items" >
+            <a class="category-link" href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
         </li>
     @empty
-        <li>No categories found.</li>
+        <li>{{ __('messages.no_categories_found') }}</li>
     @endforelse
     </ul>
+    </main>
 </body>
 </html>

@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-@include('layouts.navbar')
-    <div class="container">
+<header>@include('layouts.navbar')</header>
+    <main>
         <h1>{{ $category->name }}</h1>
         @auth
             @if(Auth::user()->isAdmin())
@@ -21,13 +21,13 @@
         @forelse($category->photos as $photo)
             <li class="mb-3">
                 <a href="{{ route('photos.show', $photo->id) }}">
-                <img src="{{ asset('storage/' . $photo->image_path) }}" alt="{{ $photo->title }}" style="width: 200px;">
+                <img class="photo" src="{{ asset('storage/' . $photo->image_path) }}" alt="{{ $photo->title }}" style="width: 200px;">
                 </a>
             </li>
         @empty
             <li>No photos in this category.</li>
         @endforelse
         </ul>
-    </div>
+    </main>
 </body>
 </html>

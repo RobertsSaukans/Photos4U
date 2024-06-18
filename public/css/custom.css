@@ -1,5 +1,23 @@
+body {
+    background-color: rgb(163, 201, 235);
+}
+
+main {
+    margin-left:10px;
+}
+
+body main img.image {
+    border-radius: 10px;
+}
+
+body main ul li a img.photo {
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
 .navbar-custom {
     background-color: #1f4163;
+    margin:0;
 }
 
 .navbar-custom .navbar-collapse .navbar-nav .nav-link{
@@ -28,4 +46,78 @@
 
 .navbar-custom .navbar-collapse .ml-auto .nav-item .btn-link:hover{
     color: rgb(165, 0, 0);
+}
+
+body.category-index, body.photo-index {
+    background-image: url('https://m.media-amazon.com/images/I/C1pNaISGDRL.png');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+}
+
+body ul li a.category-link {
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    color:#ffffff;
+}
+
+body ul li a.photo-category {
+    font-size: 20px;
+    text-decoration: none;
+    color:#000000;
+}
+
+body ul li a.photo-name {
+    font-size: 20px;
+    text-decoration: none;
+    color:#000000;
+}
+
+body ul li a.photo-name:hover {
+    color:#3a86d7;
+}
+
+body ul li.photo-names {
+    list-style-type:none;
+    padding-left: 0;
+}
+
+body ul li a.photo-category:hover {
+    color:#3a86d7;
+}
+
+body ul li.photo-category-list {
+    list-style-type:none;
+    padding-left: 0;
+}
+
+body ul li a.category-link:hover {
+    color:#3a86d7;
+}
+
+body ul li.list-items{
+    list-style-type:none;
+    padding-left: 0;
+}
+
+body form button.create-category {
+    font-size: 15px;
+    background-color: #1f4163;
+    color:#ffffff;
+    border-color: #000000;
+    margin-bottom:10px;
+}
+
+body form button.create-photo {
+    font-size: 15px;
+    background-color: #1f4163;
+    color:#ffffff;
+    border-color: #000000;
+    margin-bottom:10px;
+}
+
+body h1{
+    font-size: 40px;
 }

@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet"> 
     <title>Photos4U</title>
 </head>
 <body>
-@include('layouts.navbar')
+<header>@include('layouts.navbar')</header>
+<main>  
     <h1>Add Category to Photo</h1>
     <form method="POST" action="{{ route('admin.photos.add_category') }}">
         @csrf
@@ -24,5 +26,6 @@
         </select><br>
         <button type="submit">Add Category to Photo</button>
     </form>
+</main>
 </body>
 </html>

@@ -6,7 +6,8 @@
     <title>Photos4U</title>
 </head>
 <body>
-@include('layouts.navbar')
+<header>@include('layouts.navbar')</header>
+<main>
     <h1>Create New Category</h1>
     <form method="POST" action="{{ route('admin.categories.store') }}">
         @csrf
@@ -14,5 +15,6 @@
         <input type="text" name="name" id="name" required><br>
         <button type="submit">Create Category</button>
     </form>
+</main>
 </body>
 </html>

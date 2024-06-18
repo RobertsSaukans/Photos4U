@@ -6,8 +6,9 @@
     <title>Photos4U</title>
 </head>
 <body>
-@include('layouts.navbar')
-        <h1>Add New Photo</h1>
+<header>@include('layouts.navbar')</header>
+    <main>
+    <h1>Add New Photo</h1>
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -43,5 +44,6 @@
             </div>
             <button type="submit" class="btn btn-primary">Upload Photo</button>
         </form>
+</main>
 </body>
 </html>

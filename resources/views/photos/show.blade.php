@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Photos4U</title></head>
+    <title>Photos4U</title>
+</head>
 <body>
-@include('layouts.navbar')
+<header>@include('layouts.navbar')</header>
+    <main>    
     <h1>{{ $photo->title }}</h1>
-    <img src="{{ asset('storage/' . $photo->image_path) }}" alt="{{ $photo->title }}" style="width: 800px;">
-    
+    <img class="image" src="{{ asset('storage/' . $photo->image_path) }}" alt="{{ $photo->title }}" style="width: 800px;">
     @auth
         @if(Auth::user()->isAdmin())
             <form action="{{ route('admin.photos.delete', $photo->id) }}" method="POST" style="display:inline;">
@@ -22,8 +23,8 @@
     <h3>Categories:</h3>
     <ul>
         @foreach ($photo->categories as $category)
-            <li>
-            <a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
+            <li class="photo-category-list" >
+            <a class="photo-category" href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
                 @if(Auth::check() && Auth::user()->isAdmin())
                     <form action="{{ route('admin.photos.removeCategory', [$photo->id, $category->id]) }}" method="POST" style="display:inline;">
                         @csrf
@@ -82,5 +83,6 @@
             <button type="submit" class="btn btn-primary">Post Comment</button>
         </form>
     @endauth
+</main>
 </body>
 </html>

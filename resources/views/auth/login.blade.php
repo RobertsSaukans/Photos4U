@@ -42,7 +42,6 @@
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
-            <a href="{{ route('auth.google') }}" class="btn btn-primary">Login with Google</a>
         </div>
     </form>
 </x-guest-layout>

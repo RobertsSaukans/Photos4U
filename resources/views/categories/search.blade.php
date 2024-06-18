@@ -6,7 +6,8 @@
     <title>Photos4U</title>
 </head>
 <body>
-@include('layouts.navbar')
+<header>@include('layouts.navbar')</header>
+    <main>    
     <h1>Search Results</h1>
     <form method="GET" action="{{ route('categories.search') }}">
         <input type="text" name="query" placeholder="Search categories">
@@ -18,5 +19,6 @@
         @endforeach
     </ul>
     <a href="{{ route('categories.index') }}">Back to Categories</a>
+</main>
 </body>
 </html>

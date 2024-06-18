@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LanguageController;
 
 Route::get('/', [CategoryController::class, 'index'])->name('home');
 
@@ -49,5 +50,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+Route::get('language/{lang}', [LanguageController::class, 'switchLanguage'])->name('language.switch');
 
 require __DIR__.'/auth.php';
